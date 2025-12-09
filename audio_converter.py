@@ -84,10 +84,12 @@ def convert_video_to_video_note(input_path: str) -> str:
         size = min(width, height, 1280)  # Max 1280px for Telegram
 
         # Convert video to square format for video notes
-        # Crop to square and scale to appropriate size
+        # Crop to square using actual width and height values
+        crop_size = min(width, height)  # Crop to square based on original dimensions
         stream = ffmpeg.input(input_path, t=60)  # Input the video file, max 60 seconds
-        stream = ffmpeg.filter_(stream, 'crop', 'min(iw,ih)', 'min(iw,ih)')  # Crop to square: w='min(iw,ih)', h='min(iw,ih)'
-        stream = ffmpeg.filter_(stream, 'scale', size, size)  # Scale to appropriate square size
+        # Crop to square using calculated size - crop from center
+        stream = stream.filter_('crop', crop_size, crop_size)
+        stream = stream.filter_('scale', size, size)  # Scale to appropriate square size
 
         output = ffmpeg.output(
             stream,
