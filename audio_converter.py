@@ -87,9 +87,9 @@ def convert_video_to_video_note(input_path: str) -> str:
         # Crop to square and scale to appropriate size
         (
             ffmpeg
-            .input(input_path, t=60)  # Limit to 60 seconds maximum for video notes
-            .filter('crop', f'min(iw,ih):min(iw,ih)')
-            .filter('scale', size, size)
+            .input(input_path)  # Input the video file
+            .filter_('crop', 'min(iw,ih):min(iw,ih)')  # Crop to square
+            .filter_('scale', f'{size}:{size}')  # Scale to appropriate square size
             .output(
                 output_path,
                 vcodec='libx264',      # H.264 codec for MP4
@@ -97,7 +97,8 @@ def convert_video_to_video_note(input_path: str) -> str:
                 movflags='faststart',  # Optimize for streaming
                 preset='fast',         # Conversion speed vs quality
                 t=60,                  # Maximum duration 60 seconds
-                fs='8MB'               # File size limit (Telegram limit)
+                video_bitrate='1000k', # Limit bitrate to help with file size
+                audio_bitrate='64k'    # Audio bitrate for smaller size
             )
             .overwrite_output()
             .run(capture_stdout=True, capture_stderr=True)
