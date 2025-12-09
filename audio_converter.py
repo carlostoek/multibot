@@ -86,9 +86,11 @@ def convert_video_to_video_note(input_path: str) -> str:
         # Convert video to square format for video notes
         # Crop to square using actual width and height values
         crop_size = min(width, height)  # Crop to square based on original dimensions
+        x_pos = (width - crop_size) // 2  # Calculate x position for center crop
+        y_pos = (height - crop_size) // 2  # Calculate y position for center crop
         stream = ffmpeg.input(input_path, t=60)  # Input the video file, max 60 seconds
-        # Crop to square using calculated size - crop from center
-        stream = stream.filter_('crop', crop_size, crop_size)
+        # Crop to square using calculated size and position for center crop
+        stream = stream.filter_('crop', crop_size, crop_size, x_pos, y_pos)
         stream = stream.filter_('scale', size, size)  # Scale to appropriate square size
 
         output = ffmpeg.output(
