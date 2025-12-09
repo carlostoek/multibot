@@ -17,7 +17,8 @@ def convert_audio_to_voice_note(input_path: str) -> str:
     Raises:
         Exception: If conversion fails
     """
-    output_path = tempfile.mktemp(suffix=".ogg")
+    fd, output_path = tempfile.mkstemp(suffix=".ogg")
+    os.close(fd)
 
     try:
         # Convert audio to OPUS format with appropriate parameters for voice notes
