@@ -89,7 +89,7 @@ def convert_video_to_video_note(input_path: str) -> str:
             ffmpeg
             .input(input_path, t=60)  # Input the video file, max 60 seconds
             .filter_('crop', 'min(iw,ih):min(iw,ih)')  # Crop to square
-            .filter_('scale', f'{size}:{size}')  # Scale to appropriate square size
+            .filter_('scale', size, size)  # Scale to appropriate square size
             .output(
                 output_path,
                 vcodec='libx264',      # H.264 codec for MP4
