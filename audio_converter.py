@@ -87,7 +87,7 @@ def convert_video_to_video_note(input_path: str) -> str:
         # Crop to square and scale to appropriate size
         (
             ffmpeg
-            .input(input_path)  # Input the video file
+            .input(input_path, t=60)  # Input the video file, max 60 seconds
             .filter_('crop', 'min(iw,ih):min(iw,ih)')  # Crop to square
             .filter_('scale', f'{size}:{size}')  # Scale to appropriate square size
             .output(
@@ -96,7 +96,6 @@ def convert_video_to_video_note(input_path: str) -> str:
                 pix_fmt='yuv420p',     # Pixel format for compatibility
                 movflags='faststart',  # Optimize for streaming
                 preset='fast',         # Conversion speed vs quality
-                t=60,                  # Maximum duration 60 seconds
                 video_bitrate='1000k', # Limit bitrate to help with file size
                 audio_bitrate='64k'    # Audio bitrate for smaller size
             )
