@@ -85,23 +85,22 @@ def convert_video_to_video_note(input_path: str) -> str:
 
         # Convert video to square format for video notes
         # Crop to square and scale to appropriate size
-        (
-            ffmpeg
-            .input(input_path, t=60)  # Input the video file, max 60 seconds
-            .filter_('crop', 'min(iw,ih):min(iw,ih)')  # Crop to square
-            .filter_('scale', size, size)  # Scale to appropriate square size
-            .output(
-                output_path,
-                vcodec='libx264',      # H.264 codec for MP4
-                pix_fmt='yuv420p',     # Pixel format for compatibility
-                movflags='faststart',  # Optimize for streaming
-                preset='fast',         # Conversion speed vs quality
-                video_bitrate='1000k', # Limit bitrate to help with file size
-                audio_bitrate='64k'    # Audio bitrate for smaller size
-            )
-            .overwrite_output()
-            .run(capture_stdout=True, capture_stderr=True)
+        video_input = ffmpeg.input(input_path, t=60)  # Input the video file, max 60 seconds
+        video_filtered = ffmpeg.filter([video_input], 'crop', 'min(iw,ih)', 'min(iw,ih)')  # Crop to square
+        video_scaled = ffmpeg.filter([video_filtered], 'scale', size, size)  # Scale to appropriate square size
+
+        output = ffmpeg.output(
+            video_scaled,
+            output_path,
+            vcodec='libx264',      # H.264 codec for MP4
+            pix_fmt='yuv420p',     # Pixel format for compatibility
+            movflags='faststart',  # Optimize for streaming
+            preset='fast',         # Conversion speed vs quality
+            video_bitrate='1000k', # Limit bitrate to help with file size
+            audio_bitrate='64k'    # Audio bitrate for smaller size
         )
+
+        output.run(overwrite_output=True, capture_stdout=True, capture_stderr=True)
     except ffmpeg.Error as e:
         # Clean up the temp file if conversion fails
         if os.path.exists(output_path):
