@@ -98,7 +98,8 @@ def convert_video_to_video_note(input_path: str) -> str:
             pix_fmt='yuv420p',     # Pixel format for compatibility
             movflags='faststart',  # Optimize for streaming
             preset='fast',         # Conversion speed vs quality
-            b='1000k'              # Video bitrate to help control file size
+            video_bitrate='1000k', # Video bitrate to help control file size
+            audio_bitrate='64k'    # Audio bitrate to help control file size
         )
 
         output.run(overwrite_output=True, capture_stdout=True, capture_stderr=True)
