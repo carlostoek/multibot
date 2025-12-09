@@ -1,11 +1,12 @@
-# Telegram Audio to Voice Note Converter Bot
+# Telegram Audio/Video to Voice/Video Note Converter Bot
 
-This bot converts audio files (primarily MP3) to Telegram voice notes.
+This bot converts audio and video files to Telegram voice and video notes.
 
 ## Features
 
 - Converts various audio formats (MP3, WAV, etc.) to voice notes
-- Maintains good audio quality during conversion
+- Converts various video formats (MP4, AVI, etc.) to video notes
+- Maintains good quality during conversion
 - Handles file size limits automatically
 - Provides user-friendly feedback
 

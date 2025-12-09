@@ -31,8 +31,8 @@ def test_imports():
         return False
 
     try:
-        from audio_converter import convert_audio_to_voice_note
-        print("✓ audio_converter module imported successfully")
+        from audio_converter import convert_audio_to_voice_note, convert_video_to_video_note
+        print("✓ audio_converter module imported successfully with video support")
     except ImportError as e:
         print(f"✗ Failed to import audio_converter: {e}")
         return False

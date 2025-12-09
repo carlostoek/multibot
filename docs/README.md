@@ -1,13 +1,14 @@
-# Audio to Voice Note Converter Bot - Documentation
+# Audio/Video to Voice/Video Note Converter Bot - Documentation
 
 ## Overview
 
-The Audio to Voice Note Converter Bot is a Telegram bot that converts audio files (mainly MP3) to Telegram voice notes. The bot accepts various audio formats and converts them to OPUS format suitable for Telegram voice notes.
+The Audio/Video to Voice/Video Note Converter Bot is a Telegram bot that converts audio files (mainly MP3) to Telegram voice notes and video files to Telegram video notes. The bot accepts various audio and video formats and converts them to formats suitable for Telegram notes.
 
 ## Features
 
 - Converts multiple audio formats (MP3, WAV, FLAC, AAC, M4A, WMA, OGG, OPUS) to Telegram-compatible voice notes
-- Handles Telegram's file size limitations (20MB maximum)
+- Converts multiple video formats (MP4, AVI, MOV, MKV, etc.) to Telegram-compatible video notes
+- Handles Telegram's file size limitations
 - Provides user feedback during processing
 - Comprehensive error handling with user-friendly messages
 - Automatically cleans up temporary files
@@ -65,7 +66,7 @@ The bot handles various error scenarios:
 
 ## File Formats Supported
 
-### Input Formats
+### Input Audio Formats
 - MP3 - MPEG Audio Layer III
 - WAV - Waveform Audio File Format
 - FLAC - Free Lossless Audio Codec
@@ -75,8 +76,22 @@ The bot handles various error scenarios:
 - OGG - Ogg Vorbis
 - OPUS - Opus Interactive Audio Codec
 
-### Output Format
+### Input Video Formats
+- MP4 - MPEG-4 Part 14
+- AVI - Audio Video Interleave
+- MOV - QuickTime File Format
+- MKV - Matroska Video
+- WMV - Windows Media Video
+- FLV - Flash Video
+- WEBM - WebM Multimedia File
+- M4V - iTunes Video
+- 3GP - 3GPP Multimedia File
+
+### Output Audio Format
 - OGG/OPUS - Optimized for Telegram voice notes (48kHz, mono, 64k bitrate, voip application)
+
+### Output Video Format
+- MP4/H.264 - Optimized for Telegram video notes (square format, up to 1280px, max 60 seconds)
 
 ## API Reference
 
@@ -91,13 +106,28 @@ Processes audio files sent as documents, converts them to voice notes, and sends
 #### `handle_audio(message: types.Message)`
 Processes audio files sent as audio type, converts them to voice notes, and sends them back.
 
-### Audio Conversion Functions
+#### `handle_video_document(message: types.Message)`
+Processes video files sent as documents, converts them to video notes, and sends them back.
+
+#### `handle_video(message: types.Message)`
+Processes video files sent as video type, converts them to video notes, and sends them back.
+
+### Conversion Functions
 
 #### `convert_audio_to_voice_note(input_path: str) -> str`
 Converts an audio file to OPUS format suitable for voice notes.
 
+#### `convert_video_to_video_note(input_path: str) -> str`
+Converts a video file to MP4 format suitable for video notes (square format, up to 1280px).
+
 #### `get_file_size(path: str) -> int`
 Returns the file size in bytes.
 
+#### `is_supported_audio_format(file_path: str) -> bool`
+Checks if the file format is supported for audio conversion.
+
+#### `is_supported_video_format(file_path: str) -> bool`
+Checks if the file format is supported for video conversion.
+
 #### `is_supported_format(file_path: str) -> bool`
-Checks if the file format is supported for conversion.
+Checks if the file format is supported for conversion (audio or video).

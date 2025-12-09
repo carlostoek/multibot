@@ -54,9 +54,9 @@
 
 **Symptoms**:
 - Bot reports unsupported format
-- Audio files are not processed
+- Audio or video files are not processed
 
-**Supported Formats**:
+**Supported Audio Formats**:
 - MP3 - MPEG Audio Layer III
 - WAV - Waveform Audio File Format
 - FLAC - Free Lossless Audio Codec
@@ -66,8 +66,19 @@
 - OGG - Ogg Vorbis
 - OPUS - Opus Interactive Audio Codec
 
+**Supported Video Formats**:
+- MP4 - MPEG-4 Part 14
+- AVI - Audio Video Interleave
+- MOV - QuickTime File Format
+- MKV - Matroska Video
+- WMV - Windows Media Video
+- FLV - Flash Video
+- WEBM - WebM Multimedia File
+- M4V - iTunes Video
+- 3GP - 3GPP Multimedia File
+
 **Solutions**:
-1. **Convert to supported format**: Use audio software to convert to MP3/WAV before sending
+1. **Convert to supported format**: Use audio/video software to convert before sending
 2. **Verify file extension**: Ensure the file has the correct extension
 3. **Check file integrity**: Corrupted files may not be recognized properly
 
@@ -91,11 +102,27 @@
 
 **Solution**: Check the original file integrity and try again.
 
+### "No video stream found"
+
+**Cause**: The video file does not contain a valid video stream.
+
+**Solution**: Verify that the file is actually a video file and not just an audio file with a video extension.
+
 ### "File is too large" or "Converted audio is too large"
 
-**Cause**: The file exceeds Telegram's 20MB limit.
-
+**For Audio**: The file exceeds Telegram's 20MB limit.
 **Solution**: Reduce the original file size before sending.
+
+### "Converted video is too large"
+
+**For Video**: The converted video exceeds Telegram's 8MB limit for video notes.
+**Solution**: Send a shorter video clip or reduce the resolution before sending.
+
+### Video conversion fails with FFmpeg error
+
+**Cause**: Issues with video format, codec, or file corruption.
+
+**Solution**: Try with a different video file to ensure the file is valid and properly formatted.
 
 ## Debugging Steps
 
