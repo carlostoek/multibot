@@ -2,6 +2,7 @@ import asyncio
 import logging
 import os
 from aiogram import Bot, Dispatcher, types
+from aiogram.types import FSInputFile
 from aiogram.filters import Command
 from dotenv import load_dotenv
 import tempfile
@@ -97,8 +98,7 @@ async def handle_audio_document(message: types.Message):
             return
 
         # Send the converted voice note
-        with open(output_path, 'rb') as voice_note:
-            await message.reply_voice(voice_note)
+        await message.reply_voice(FSInputFile(output_path))
 
         # Clean up temporary files
         if temp_input_path and os.path.exists(temp_input_path):
@@ -183,8 +183,7 @@ async def handle_audio(message: types.Message):
             return
 
         # Send the converted voice note
-        with open(output_path, 'rb') as voice_note:
-            await message.reply_voice(voice_note)
+        await message.reply_voice(FSInputFile(output_path))
 
         # Clean up temporary files
         if temp_input_path and os.path.exists(temp_input_path):
