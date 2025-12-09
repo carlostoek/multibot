@@ -66,6 +66,8 @@ def get_file_size(path: str) -> int:
     return os.path.getsize(path)
 
 
+SUPPORTED_FORMATS = {'.mp3', '.wav', '.flac', '.aac', '.m4a', '.wma', '.ogg', '.opus'}
+
 def is_supported_format(file_path: str) -> bool:
     """
     Check if the file format is supported for conversion.
@@ -76,5 +78,4 @@ def is_supported_format(file_path: str) -> bool:
     Returns:
         bool: True if format is supported, False otherwise
     """
-    supported_formats = ['.mp3', '.wav', '.flac', '.aac', '.m4a', '.wma', '.ogg', '.opus']
-    return Path(file_path).suffix.lower() in supported_formats
+    return Path(file_path).suffix.lower() in SUPPORTED_FORMATS
