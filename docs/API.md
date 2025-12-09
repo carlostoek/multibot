@@ -128,7 +128,7 @@
 - Format: Square (cropped to minimum of width/height)
 - Max Size: 1280px
 - Max Duration: 60 seconds
-- Max File Size: 8MB
+- Bitrate: 1000k video, 64k audio (to help control file size)
 
 **Raises**:
 - `Exception`: If FFmpeg conversion fails

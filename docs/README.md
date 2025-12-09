@@ -91,7 +91,7 @@ The bot handles various error scenarios:
 - OGG/OPUS - Optimized for Telegram voice notes (48kHz, mono, 64k bitrate, voip application)
 
 ### Output Video Format
-- MP4/H.264 - Optimized for Telegram video notes (square format, up to 1280px, max 60 seconds)
+- MP4/H.264 - Optimized for Telegram video notes (square format, up to 1280px, max 60 seconds, bitrate optimized for size)
 
 ## API Reference
 

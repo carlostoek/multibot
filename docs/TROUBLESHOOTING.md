@@ -116,7 +116,7 @@
 ### "Converted video is too large"
 
 **For Video**: The converted video exceeds Telegram's 8MB limit for video notes.
-**Solution**: Send a shorter video clip or reduce the resolution before sending.
+**Solution**: Send a shorter video clip (under 60 seconds) with lower resolution to reduce file size.
 
 ### Video conversion fails with FFmpeg error
 
